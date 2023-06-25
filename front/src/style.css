@@ -1,0 +1,125 @@
+
+
+
+footer {
+    margin-top: 34%;
+    background-color: lightsteelblue;
+    padding: 7px;
+  }
+  img#img {
+    width: 16pc;
+  }
+  .display {
+    display: inline-block;
+    /* position: relative; */
+    text-align: center;
+    border: 1px solid;
+    margin-inline: 2pc;
+  
+    border-radius: 5px;
+  }
+  
+  
+  body{
+    padding:0%;
+    margin:0%;
+    display:block;
+  
+  }
+  
+  .qty {
+    position: absolute;
+    top: 68%;
+    left: 0%;
+}
+  nav a {
+    margin: 1rem;
+  }
+  img#img {
+    width: 12pc;
+  }
+  .display {
+    display: inline-block;
+    /* position: relative; */
+    text-align: center;
+    border: 1px solid darkgray;
+    margin-inline: 1pc;
+    margin-top: 4pc;
+    border-radius: 5px;
+  
+  }
+  a {
+    text-decoration: none;
+  }
+  nav {
+    background: rgb(34, 34, 34);
+    color: white;
+    padding: 16px;
+  }
+  a#back {
+    position: absolute;
+    font-size: 1pc;
+    color: black;
+    background: beige;
+    padding: 1pc;
+   max-width: 11pc;
+    text-align: center;
+    bottom: 110%;
+    max-height: fit-content;
+  }
+  div#dis {
+    position: absolute;
+    left: 18%;
+    background: whitesmoke;
+    display: inline-table;
+  }
+  h1#cen{
+    text-align: center;
+  }
+  .category {
+    position: absolute;
+    left: 41%;
+    top: 20%;
+    text-align: center;
+    border: 2px solid gray;
+    font-family: system-ui;
+    font-weight: bolder;
+  }
+  button.btn.btn-primary {
+    background: gold;
+    width: 16pc;
+    border-radius: 0px;
+    color: black;
+    font-family: fantasy;
+  }
+  img {
+    max-width: 18pc;
+    vertical-align: middle;
+    max-height: 80%;
+  }
+  .my\=3.p\=3.rounded.card {
+    display: inline-block;
+    margin-inline: 1pc;
+    margin-block: 20px;
+    text-align: center;
+    margin-left: 30px;
+  }
+  
+  .btn-group {
+    background: black;
+    color: white;
+    border-radius: 0;
+    padding: 1pc;
+    text-align: center;
+    margin-left: 30px;
+  }
+  .container {
+    position: absolute;
+    top: 28%;
+    left: 14%;
+  }
+  .seaarch {
+    position: absolute;
+    left: 83%;
+    top: 4%;
+  }
