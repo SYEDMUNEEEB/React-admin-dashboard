@@ -100,7 +100,7 @@ export default function OrderScreen() {
                   Paid at {order.paidAt}
                 </MessageBox>
               ) : (
-                <MessageBox variant="success">Cash on delievery</MessageBox>
+                <MessageBox variant="success">payment with stripe</MessageBox>
               )}
             </Card.Body>
           </Card>

@@ -8,18 +8,19 @@ nav.navbar {
 
 .navbar.sticky {
   /* sticky background color */
-  background-color:white;
+  background-color:green;
   transition: 1s;
-  color: #000000;
+  color: white;
 }
 
 header {
-  background-color:whitesmoke;
+  background-color:blueviolet;
   position: sticky;
   width: 100%;
   top: 0;
   z-index: 100;
-color: white;
+color: w;
+
  
 }
 header a {
@@ -122,3 +123,11 @@ button#btn1 {
 }
 
 
+/* dark-mode.css */
+body.dark-mode {
+  /* Dark mode styles */
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Text color in dark mode */
+}
+
+/* Customize other elements in dark mode as needed */

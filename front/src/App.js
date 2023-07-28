@@ -26,10 +26,24 @@ import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import { getError } from './utils';
 import axios from 'axios';
-
+import { FaMoon, FaSun } from 'react-icons/fa'; // Import the Font Awesome icons
 
 function App() {
-  
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Effect to apply dark mode class to the body based on the darkMode state
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [darkMode]);
+
+  // Function to toggle dark mode
+  const toggleDarkMode = () => {
+    setDarkMode((prevDarkMode) => !prevDarkMode);
+  };  
     const [isSticky, setIsSticky] = useState(false);
   
     useEffect(() => {
@@ -76,14 +90,14 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      <div className="d-flex flex-column site-container">
+       <div className={`d-flex flex-column site-container ${darkMode ? 'dark-mode' : ''}`}>
         <ToastContainer position="bottom-center" limit={1} />
         <header>
           <div className={navbarClassName}>  
           <Navbar  >
             <Container>
               <Link to="/">
-                <Navbar.Brand> Food Store</Navbar.Brand>
+                <Navbar.Brand>Fantastic 4</Navbar.Brand>
               </Link>
               <SearchBox/>
               <Nav className="me-auto">
@@ -128,8 +142,15 @@ function App() {
              
              
             </Container>
-          
+            <button
+                  className="btn btn-sm btn-outline-light mx-2"
+                  onClick={toggleDarkMode}
+                >
+                  {darkMode ? <FaMoon /> : <FaSun />}
+                  
+                </button>
           </Navbar>
+       
           </div>
         </header>
         <main>
