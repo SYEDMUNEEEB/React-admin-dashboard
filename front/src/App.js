@@ -97,7 +97,7 @@ function App() {
           <Navbar  >
             <Container>
               <Link to="/">
-                <Navbar.Brand>Fantastic 4</Navbar.Brand>
+                <Navbar.Brand>EverLast</Navbar.Brand>
               </Link>
               <SearchBox/>
               <Nav className="me-auto">

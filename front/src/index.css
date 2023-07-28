@@ -131,3 +131,7 @@ body.dark-mode {
 }
 
 /* Customize other elements in dark mode as needed */
+span.navbar-brand {
+  color: white !important;
+  font-family: 'FontAwesome' !important;
+}
