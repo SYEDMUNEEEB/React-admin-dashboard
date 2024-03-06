@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useReducer } from 'react';
+import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
@@ -15,27 +16,57 @@ const reducer = (state, action) => {
       return { ...state, orders: action.payload, loading: false };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+    case 'UPDATE_PAYMENT_STATUS':
+      return {
+        ...state,
+        orders: state.orders.map((order) =>
+          order._id === action.payload.orderId
+            ? action.payload.updatedOrder
+            : order
+        ),
+      };
     default:
       return state;
   }
 };
 
 export default function OrderHistoryScreen() {
-  const { state } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
-  const navigate = useNavigate();
+  const navigate = useNavigate;
 
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
+    orders: [],
   });
+
+  const updatePaymentStatus = async (orderId) => {
+    try {
+      // Make an API call to update the payment status for the order.
+      const { data } = await axios.put(
+        `/api/orders/${orderId}/pay`,
+        {},
+        { headers: { Authorization: `Bearer ${userInfo.token}` }}
+      );
+      
+      // Update the local state to reflect the change in payment status.
+      dispatch({
+        type: 'UPDATE_PAYMENT_STATUS',
+        payload: { orderId, updatedOrder: data },
+      });
+    } catch (error) {
+      // Handle any errors that occur during the API call.
+      console.error('Error updating payment status:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
         const { data } = await axios.get(
-          `/api/order/mine`,
+          `/api/orders/mine`,
           { headers: { Authorization: `Bearer ${userInfo.token}` } }
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -51,6 +82,10 @@ export default function OrderHistoryScreen() {
 
   return (
     <div>
+      <Helmet>
+        <title>Order History</title>
+      </Helmet>
+
       <h1>Order History</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -81,15 +116,27 @@ export default function OrderHistoryScreen() {
                     : 'No'}
                 </td>
                 <td>
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => {
-                      navigate(`/order/${order._id}`);
-                    }}
-                  >
-                    Details
-                  </Button>
+                  {order.isPaid ? (
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => {
+                        navigate(`/order/${order._id}`);
+                      }}
+                    >
+                      Details
+                    </Button>
+                  ) : (
+                    <Button
+                      type="button"
+                      variant="primary"
+                      onClick={() => {
+                        updatePaymentStatus(order._id);
+                      }}
+                    >
+                      Confirm Payment
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}

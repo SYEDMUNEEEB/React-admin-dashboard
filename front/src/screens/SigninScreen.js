@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
+import { Helmet } from 'react-helmet-async';
 import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
@@ -43,9 +43,9 @@ export default function SigninScreen() {
 
   return (
     <Container className="small-container">
-      <h1>
+      <Helmet>
         <title>Sign In</title>
-      </h1>
+      </Helmet>
       <h1 className="my-3">Sign In</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="email">
@@ -70,6 +70,9 @@ export default function SigninScreen() {
         <div className="mb-3">
           New customer?{' '}
           <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+        </div>
+        <div className="mb-3">
+          Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
         </div>
       </Form>
     </Container>

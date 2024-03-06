@@ -1,17 +1,14 @@
-
 import { useContext } from 'react';
 import { Store } from '../Store';
-
+import { Helmet } from 'react-helmet-async';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MessageBox from '../components/MessageBox';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -41,10 +38,10 @@ export default function CartScreen() {
 
   return (
     <div>
-      <CardHeader>
+      <Helmet>
         <title>Shopping Cart</title>
-      </CardHeader>
-      <h1>Shopping Cart  <i class="fa fa-shopping-cart" aria-hidden="true"></i></h1>
+      </Helmet>
+      <h1>Shopping Cart</h1>
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
@@ -65,7 +62,6 @@ export default function CartScreen() {
                       <Link to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
                     <Col md={3}>
-                      <Button variant="light" disabled={item.quantity === 1}/>
                       <Button
                         onClick={() =>
                           updateCartHandler(item, item.quantity - 1)
@@ -88,7 +84,6 @@ export default function CartScreen() {
                     </Col>
                     <Col md={3}>${item.price}</Col>
                     <Col md={2}>
-                      <Button variant="light"/>
                       <Button
                         onClick={() => removeItemHandler(item)}
                         variant="light"

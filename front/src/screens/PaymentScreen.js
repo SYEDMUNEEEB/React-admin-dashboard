@@ -1,10 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import CheckoutSteps from '../components/CheckoutSteps';
-import { Store } from '../Store';
-import StripeCheckout from 'react-stripe-checkout'; // 
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import StripeCheckout from 'react-stripe-checkout';
 
 export default function PaymentScreen() {
   // ...

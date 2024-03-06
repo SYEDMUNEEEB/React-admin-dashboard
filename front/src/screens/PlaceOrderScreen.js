@@ -1,7 +1,6 @@
-
 import Axios from 'axios';
-import  { useContext, useEffect, useReducer } from 'react';
-
+import React, { useContext, useEffect, useReducer } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -45,13 +44,12 @@ export default function PlaceOrderScreen() {
   cart.taxPrice = round2(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
- 
   const placeOrderHandler = async () => {
     try {
       dispatch({ type: 'CREATE_REQUEST' });
 
       const { data } = await Axios.post(
-        '/api/order',
+        '/api/orders',
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,
@@ -82,10 +80,13 @@ export default function PlaceOrderScreen() {
       navigate('/payment');
     }
   }, [cart, navigate]);
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
-    
+      <Helmet>
+        <title>Preview Order</title>
+      </Helmet>
       <h1 className="my-3">Preview Order</h1>
       <Row>
         <Col md={8}>
@@ -94,17 +95,14 @@ export default function PlaceOrderScreen() {
               <Card.Title>Shipping</Card.Title>
               <Card.Text>
                 <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                <strong>Address: </strong> {cart.shippingAddress.address}<br/>
-                {cart.shippingAddress.city}<br/> {cart.shippingAddress.postalCode}<br/>
-                {cart.shippingAddress.country} <br/> {cart.shippingAddress.phoneNumber}<br/>     <div className="App">
-                <iframe 
-              required src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56203.38448218976!2d70.09535949897094!3d28.30706135057921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393741e8303577ff%3A0xd7692de5d06b6d78!2sSadiqabad%2C%20Rahim%20Yar%20Khan%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1673951336342!5m2!1sen!2s"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style={{ border: "0",width:600,height:500 }}/>
-   
-    </div>
+                <strong>Address: </strong> {cart.shippingAddress.address},
+                {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
+                {cart.shippingAddress.country}
               </Card.Text>
               <Link to="/shipping">Edit</Link>
             </Card.Body>
           </Card>
+
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Payment</Card.Title>
@@ -114,6 +112,7 @@ export default function PlaceOrderScreen() {
               <Link to="/payment">Edit</Link>
             </Card.Body>
           </Card>
+
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Items</Card.Title>
